@@ -1,13 +1,13 @@
 """Library for managing truly massive numbers at variable precision by storing numbers as gzipped strings."""
 
 import decimal
-import zlib
 import sys
+import zlib
 
 assert sys.version_info >= (3, 5), 'Must be used on python >= 3.5.0'  # don't want to deal with longs, byte-strings, etc.
 
 
-HUGE_NUM_THRESHOLD = 442948  # memory footprint in bytes before an nubmer is considered huge
+HUGE_NUM_THRESHOLD = 442948  # memory footprint in bytes before an nubmer is compressed
 HUGE_STR_THRESHOLD = 1000    # memroy footprint in bytes before a stringified number is considered huge
 
 def is_huge(value):
@@ -42,7 +42,10 @@ _INT_FALLBACK_METHODS = (
 def _get_proxy_method(name):
     def _proxy_method(self, *args, **kwgs):
         args = (int(arg) for arg in args)
-        return getattr(self._value, name)(*args, **kwgs)
+        result = getattr(self._value, name)(*args, **kwgs)
+        if isinstance(result, int) and name != '__int__':
+            return HugeInt(result)
+        return result
     # Not a proper qualname, but oh well
     _proxy_method.__name__ = _proxy_method.__qualname__ = name
     return _proxy_method
