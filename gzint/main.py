@@ -18,7 +18,7 @@ def is_huge(value):
         if value.__sizeof__() >= HUGE_STR_THRESHOLD:
             return True
     elif value.__class__.__name__ == 'HugeInt':
-        return is_huge(value.value)
+        return value._is_huge
     return False
 
 def compress(value):
@@ -41,13 +41,19 @@ _INT_FALLBACK_METHODS = (
 )
 def _get_proxy_method(name):
     def _proxy_method(self, *args, **kwgs):
+        # convert all arguments to normal integers
         args = (int(arg) for arg in args)
-        result = getattr(self._value, name)(*args, **kwgs)
+
+        # get the result from the int.__method__
+        result = getattr(self.to_int(), name)(*args, **kwgs)
+
+        # if the result is an int, convert back to a HugeInt
         if isinstance(result, int) and name != '__int__':
             return HugeInt(result)
+
         return result
-    # Not a proper qualname, but oh well
-    _proxy_method.__name__ = _proxy_method.__qualname__ = name
+
+    _proxy_method.__name__ = _proxy_method.__qualname__ = name  # Not a proper qualname, but oh well
     return _proxy_method
 
 _IntFallback = type(
@@ -68,7 +74,7 @@ class HugeInt(_IntFallback):
         if self._is_huge:
             self._value = compress(str(new_value).encode('utf-8', 'ascii'))
         else:
-            self._value = int(new_value)
+            self._value = int_new_value
 
     def __str__(self):
         if self._is_huge:
@@ -84,6 +90,8 @@ class HugeInt(_IntFallback):
     def __eq__(self, other):
         if other.__class__.__name__ == 'HugeInt':
             return self._value == other._value
+        elif isinstance(other, int):
+            return self._hash == other.__hash__()
         return self.to_int() == other
 
     def __hash__(self):
