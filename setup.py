@@ -12,13 +12,13 @@ try:
         short_description = readme_header[0].split(': ')[-1] + '.'
         long_description = readme_header[2].split('\n', 2)[2].split('\n\n')[0].replace('\n', ' ').replace('`', '')
 except Exception:
-    print('[!] Failed to parse gzint description from README.md')
+    print('[!] Failed to parse package description from README.md')
     short_description = 'A library for storing huge integeters efficiently'
     long_description = 'This python library helps store massive integers by using a gzipped-string representation in memory.'
 
 setup(
     name='gzint',
-    version='0.0.2',
+    version='0.0.3',
     description=short_description,      # parsed from first line of README.md
     long_description=long_description,  # parsed from first section of README.md
 
@@ -40,8 +40,6 @@ setup(
     keywords='int bigint integers memory gzip storage compression math',
 
     packages=['gzint'],
+    test_suite='gzint.tests',
     install_requires=[],
-    extras_require={
-        'dev': ['bpython', 'ipdb'],
-    },
 )
