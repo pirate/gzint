@@ -96,25 +96,4 @@ class HugeInt(_IntFallback):
 
     # TODO: properly implement all the it fallback methods directly on HugeInt
     def __getattr__(self, attr):
-        return getattr(self.value, attr)
-
-def test_hugeint():
-    test_int = HugeInt()
-    assert test_int._is_huge == False
-    assert test_int._value == 0
-    assert test_int == 0
-
-    assert HugeInt(10) == 10
-    assert HugeInt(10**10000) == 10**10000
-    assert HugeInt(10**1000000) == 10**1000000
-
-    assert HugeInt(10) == HugeInt(10)
-    assert HugeInt(10) + 10 == 20
-    assert HugeInt(20) - 20 == 0
-    assert HugeInt(10) + HugeInt(10) == 20
-    assert HugeInt(10) + HugeInt(10) == HugeInt(20)
-    assert HugeInt(20) / HugeInt(10) == 2
-    return True
-
-if __name__ == '__main__':
-    test_hugeint()
+        return getattr(self.to_int(), attr)
