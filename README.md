@@ -1,10 +1,10 @@
-# Gzint: A library for storing **huge** integeters efficiently in python
+# gzint: A library for storing huge integeters efficiently
 
-This library helps store massive integers by keeping a gzipped-string representation in memory.
+This python library helps store massive integers by using a gzipped-string representation in memory.
 It makes storing and comparing huge integers fast and lightweight, while gracefully falling back to normal
-integer operations when math is needed.
+integer operations when math is needed.  It works as a drop-in replacement for `int`.
 
-## Usage:
+## Quickstart:
 
 ```bash
 git checkout https://github.com/pirate/gzint.git    # python3.5 is the only dependency (brew install python3)
@@ -62,8 +62,9 @@ equivalent method, and then the result is re-compressed and returned as a `HugeI
 
 **Example Use Case:**
 
+Read a file full of huge numbers, and check to see which ones occur more than once (in O(n) time).
+
 ```python
-# Read file full of huge numbers, and check to see which ones occur more than once in O(n) time
 numbers_seen = set()
 
 for line in open('big_data.txt', 'r'):
@@ -81,9 +82,9 @@ if HugeInt(10**1000000) in numbers_seen:
     print('Saw 10^1,000,000')
 ```
 
-**Why `HugeInt` is slow:**
+**Why `HugeInt` is slow to init:**
 
-You man notice that initializing `HugeInt`s takes some time for large numbers, this is because `HugeInt` uses
+You man notice that initializing big `HugeInt`s takes some time.  This is because `HugeInt` uses
 the gzip "deflate" algorithm, and must perform an O(n) pass over the number, where n is the number of digits in base-10.
 Due to this initial cost, it's recommended to avoid using `HugeInt`s for applications where you will need to re-initialize
 many `HugeInt`s, or perform many math operations on `HugeInt`s in memory.
