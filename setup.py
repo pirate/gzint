@@ -9,7 +9,7 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     try:
         readme_header = f.read().split('\n', 2)
-        short_description = readme_header[0].split('gzint: ')[-1] + '.'
+        short_description = readme_header[0].split(': ')[-1] + '.'
         long_description = readme_header[2].split('\n', 2)[2].split('\n\n')[0].replace('\n', ' ').replace('`', '')
     except Exception:
         raise ValueError('Failed to parse gzint description from README.md')
