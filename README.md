@@ -46,19 +46,19 @@ It sacrifices CPU time during intialization and math operations, for fast compar
 `HugeInt` provides the following methods that differ from `int`:
 
 ```python
- - `HugeInt.__init__`:   Initialize a HugeInt from an `int` or str representation
- - `HugeInt.__eq__`:     Efficiently compare a `HugeInt` with another `HugeInt` or `int`
- - `HugeInt.__str__`:    Get the full `str` representation of the `HugeInt`
- - `HugeInt.__repr__`:   Get a short representation of the `HugeInt` suitable for console display
- - `HugeInt.__hash__`:   Get the `__hash__` of the uncompressed `int`
- - `HugeInt.to_int`:     Get the `int` representation of the `HugeInt`
+ - HugeInt.__init__:   Initialize a HugeInt from an `int` or str representation
+ - HugeInt.__eq__:     Efficiently compare a `HugeInt` with another `HugeInt` or `int`
+ - HugeInt.__str__:    Get the full `str` representation of the `HugeInt`
+ - HugeInt.__repr__:   Get a short representation of the `HugeInt` suitable for console display
+ - HugeInt.__hash__:   Get the `__hash__` of the uncompressed `int`
+ - HugeInt.to_int:     Get the `int` representation of the `HugeInt`
 ```
 
 Because `HugeInt` stores a compressed representation of the number, fast, direct math operations are not possible.
 For the following operations, the number gets de-compressed, the operation performed using the `int`
 equivalent method, and then the result is re-compressed and returned as a `HugeInt` (which can be very slow).
 
-`__abs__`, `__add__`, `__and__`, `__ceil__`, `__floor__`, `__floordiv__`, `__int__`, `__invert__`, `__le__`, `__lshift__`, `__lt__'`, `__mod__`, `__mul__`, `__neg__`, `__or__`, `__pos__`, `__pow__`, `__radd__'`, `__rand__`, `__rfloordiv__`, `__rlshift__`, `__rmod__`, `__rmul__`, `__ror__'`, `__round__`, `__rpow__`, `__rrshift__`, `__rshift__`, `__rsub__'`, `__rtruediv__`, `__rxor__'`, `__sub__`, `__truediv__`, `__trunc__`, `__xor__'`
+`__abs__`, `__add__`, `__and__`, `__ceil__`, `__floor__`, `__floordiv__`, `__int__`, `__invert__`, `__le__`, `__lshift__`, `__lt__`, `__mod__`, `__mul__`, `__neg__`, `__or__`, `__pos__`, `__pow__`, `__radd__`, `__rand__`, `__rfloordiv__`, `__rlshift__`, `__rmod__`, `__rmul__`, `__ror__`, `__round__`, `__rpow__`, `__rrshift__`, `__rshift__`, `__rsub__`, `__rtruediv__`, `__rxor__`, `__sub__`, `__truediv__`, `__trunc__`, `__xor__`
 
 **Example Use Case:**
 
