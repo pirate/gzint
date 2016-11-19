@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: gzint
+Version: 0.0.1
+Summary: A library for storing huge integeters efficiently
+Home-page: https://github.com/pirate/gzint
+Author: Nick Sweeting
+Author-email: gzint@sweeting.me
+License: MIT
+Description: integer operations when math is needed.  It works as a drop-in replacement for `int`.
+Keywords: int bigint integers memory gzip storage compression math
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Utilities
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.5
