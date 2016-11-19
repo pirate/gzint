@@ -1,4 +1,5 @@
 # gzint: A library for storing huge integeters efficiently
+==========================================================
 
 This python library helps store massive integers by using a gzipped-string representation in memory.
 It makes storing and comparing huge integers fast and lightweight, while gracefully falling back to normal
@@ -7,7 +8,8 @@ integer operations when math is needed.  It works as a drop-in replacement for `
 ## Quickstart:
 
 ```bash
-git checkout https://github.com/pirate/gzint.git    # python3.5 is the only dependency (brew install python3)
+git clone https://github.com/pirate/gzint.git       # python3.5 is the only dependency (brew install python3)
+cd gzint
 python3.5 gzint/tests.py                            # optional, check that tests are passing
 python3.5
 ```
