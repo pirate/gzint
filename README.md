@@ -44,51 +44,53 @@ It sacrifices CPU time during intialization and math operations, for fast compar
 `HugeInt` implements the `int` interface, you can almost always treat it like a normal python `int`.
 
 `HugeInt` provides the following methods that differ from `int`:
-    - `HugeInt.__init__`:   Initialize a HugeInt from an `int` or str representation
-    - `HugeInt.__eq__`:     Efficiently compare a `HugeInt` with another `HugeInt` or `int`
-    - `HugeInt.__str__`:    Get the full `str` representation of the `HugeInt`
-    - `HugeInt.__repr__`:   Get a short representation of the `HugeInt` suitable for console display
-    - `HugeInt.__hash__`:   Get the `__hash__` of the uncompressed `int`
-    - `HugeInt.to_int`:     Get the `int` representation of the `HugeInt`
+
+ - `HugeInt.__init__`:   Initialize a HugeInt from an `int` or str representation
+ - `HugeInt.__eq__`:     Efficiently compare a `HugeInt` with another `HugeInt` or `int`
+ - `HugeInt.__str__`:    Get the full `str` representation of the `HugeInt`
+ - `HugeInt.__repr__`:   Get a short representation of the `HugeInt` suitable for console display
+ - `HugeInt.__hash__`:   Get the `__hash__` of the uncompressed `int`
+ - `HugeInt.to_int`:     Get the `int` representation of the `HugeInt`
 
 Because `HugeInt` stores a compressed representation of the number, fast, direct math operations are not possible.
 For the following operations, the number gets de-compressed, the operation performed using the `int`
 equivalent method, and then the result is re-compressed and returned as a `HugeInt` (which can be very slow).
-    - `HugeInt.__abs__`
-    - `HugeInt.__add__`
-    - `HugeInt.__and__`
-    - `HugeInt.__ceil__`
-    - `HugeInt.__floor__`
-    - `HugeInt.__floordiv__`
-    - `HugeInt.__int__`
-    - `HugeInt.__invert__`
-    - `HugeInt.__le__`
-    - `HugeInt.__lshift__`
-    - `HugeInt.__lt__'`
-    - `HugeInt.__mod__`
-    - `HugeInt.__mul__`
-    - `HugeInt.__neg__`
-    - `HugeInt.__or__`
-    - `HugeInt.__pos__`
-    - `HugeInt.__pow__`
-    - `HugeInt.__radd__'`
-    - `HugeInt.__rand__`
-    - `HugeInt.__rfloordiv__`
-    - `HugeInt.__rlshift__`
-    - `HugeInt.__rmod__`
-    - `HugeInt.__rmul__`
-    - `HugeInt.__ror__'`
-    - `HugeInt.__round__`
-    - `HugeInt.__rpow__`
-    - `HugeInt.__rrshift__`
-    - `HugeInt.__rshift__`
-    - `HugeInt.__rsub__'`
-    - `HugeInt.__rtruediv__`
-    - `HugeInt.__rxor__'`
-    - `HugeInt.__sub__`
-    - `HugeInt.__truediv__`
-    - `HugeInt.__trunc__`
-    - `HugeInt.__xor__'`
+
+ - `HugeInt.__abs__`
+ - `HugeInt.__add__`
+ - `HugeInt.__and__`
+ - `HugeInt.__ceil__`
+ - `HugeInt.__floor__`
+ - `HugeInt.__floordiv__`
+ - `HugeInt.__int__`
+ - `HugeInt.__invert__`
+ - `HugeInt.__le__`
+ - `HugeInt.__lshift__`
+ - `HugeInt.__lt__'`
+ - `HugeInt.__mod__`
+ - `HugeInt.__mul__`
+ - `HugeInt.__neg__`
+ - `HugeInt.__or__`
+ - `HugeInt.__pos__`
+ - `HugeInt.__pow__`
+ - `HugeInt.__radd__'`
+ - `HugeInt.__rand__`
+ - `HugeInt.__rfloordiv__`
+ - `HugeInt.__rlshift__`
+ - `HugeInt.__rmod__`
+ - `HugeInt.__rmul__`
+ - `HugeInt.__ror__'`
+ - `HugeInt.__round__`
+ - `HugeInt.__rpow__`
+ - `HugeInt.__rrshift__`
+ - `HugeInt.__rshift__`
+ - `HugeInt.__rsub__'`
+ - `HugeInt.__rtruediv__`
+ - `HugeInt.__rxor__'`
+ - `HugeInt.__sub__`
+ - `HugeInt.__truediv__`
+ - `HugeInt.__trunc__`
+ - `HugeInt.__xor__'`
 
 **Example Use Case:**
 
