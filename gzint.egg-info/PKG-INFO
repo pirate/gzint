@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: gzint
-Version: 0.0.1
+Version: 0.0.2
 Summary: A library for storing huge integeters efficiently.
 Home-page: https://github.com/pirate/gzint
 Author: Nick Sweeting
