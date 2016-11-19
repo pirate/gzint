@@ -1,14 +1,14 @@
 # Gzint: A library for storing **huge** integeters efficiently in python
 
 This library helps store massive integers by keeping a gzipped-string representation in memory.
-It makes storing, and comparing huge integers fast and lightweight, while gracefully falling back to normal
-integer operations when math is needed.  It's lightweight, fast when used properly, and has no dependencies.
+It makes storing and comparing huge integers fast and lightweight, while gracefully falling back to normal
+integer operations when math is needed.
 
 ## Usage:
 
 ```bash
-git checkout https://github.com/pirate/gzint.git
-python3.5 gzint/tests.py    # optional, check that tests are passing
+git checkout https://github.com/pirate/gzint.git    # python3.5 is the only dependency (brew install python3)
+python3.5 gzint/tests.py                            # optional, check that tests are passing
 python3.5
 ```
 
