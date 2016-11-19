@@ -18,7 +18,7 @@ except Exception:
 
 setup(
     name='gzint',
-    version='0.0.3',
+    version='0.0.4',
     description=short_description,      # parsed from first line of README.md
     long_description=long_description,  # parsed from first section of README.md
 
