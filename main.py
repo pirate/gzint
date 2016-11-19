@@ -56,11 +56,19 @@ _IntFallback = type(
     {attr: _get_proxy_method(attr) for attr in _INT_FALLBACK_METHODS},
 )
 
+
 class HugeInt(_IntFallback):
-    """Store truly massive nubmers at full precision by saving them as gzipped strings in memory"""
+    """Store truly massive nubmers at full precision by saving them as gzipped strings in memory."""
 
     def __init__(self, new_value=0):
-        self.value = new_value
+        int_new_value = int(new_value)
+        self._hash = int_new_value.__hash__()
+        self._is_huge = is_huge(int_new_value)
+
+        if self._is_huge:
+            self._value = compress(str(new_value).encode('utf-8', 'ascii'))
+        else:
+            self._value = int(new_value)
 
     def __str__(self):
         return str(self.value)[:(100 if self._is_huge else -1)]
@@ -71,21 +79,15 @@ class HugeInt(_IntFallback):
     def __eq__(self, other):
         if other.__class__.__name__ == 'HugeInt':
             return self._value == other._value
-        return self.value == other
+        return self.to_int() == other
 
-    @property
-    def value(self):
+    def __hash__(self):
+        return self._hash
+
+    def to_int(self):
         if self._is_huge:
             return int(decompress(self._value))
         return self._value
-
-    @value.setter
-    def value(self, new_value):
-        self._is_huge = is_huge(new_value)
-        if self._is_huge:
-            self._value = compress(str(new_value).encode('utf-8', 'ascii'))
-        else:
-            self._value = int(new_value)
 
     # TODO: properly implement all the it fallback methods directly on HugeInt
     def __getattr__(self, attr):
