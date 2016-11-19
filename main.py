@@ -71,10 +71,15 @@ class HugeInt(_IntFallback):
             self._value = int(new_value)
 
     def __str__(self):
-        return str(self.value)[:(100 if self._is_huge else -1)]
+        if self._is_huge:
+            return decompress(self._value).decode()
+        return str(self._value)
 
     def __repr__(self):
-        return self.__str__()
+        if self._is_huge:
+            full_str = decompress(self._value)
+            return full_str[:16].decode() + '...({})'.format(len(full_str))
+        return str(self._value)
 
     def __eq__(self, other):
         if other.__class__.__name__ == 'HugeInt':
