@@ -66,6 +66,8 @@ class HugeInt(_IntFallback):
         return self.__str__()
 
     def __eq__(self, other):
+        if other.__class__.__name__ == 'HugeInt':
+            return self._value == other._value
         return self.value == other
 
     @property
@@ -96,6 +98,7 @@ def test_hugeint():
     assert HugeInt(10**10000) == 10**10000
     assert HugeInt(10**1000000) == 10**1000000
 
+    assert HugeInt(10) == HugeInt(10)
     assert HugeInt(10) + 10 == 20
     assert HugeInt(20) - 20 == 0
     assert HugeInt(10) + HugeInt(10) == 20
