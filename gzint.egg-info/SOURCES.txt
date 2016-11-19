@@ -5,5 +5,4 @@ gzint/tests.py
 gzint.egg-info/PKG-INFO
 gzint.egg-info/SOURCES.txt
 gzint.egg-info/dependency_links.txt
-gzint.egg-info/requires.txt
 gzint.egg-info/top_level.txt

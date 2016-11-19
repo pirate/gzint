@@ -10,13 +10,6 @@ integer operations when math is needed.  It works as a drop-in replacement for `
 ```bash
 pip3 install gzint
 ```
-OR:
-
-```bash
-git clone https://github.com/pirate/gzint.git       # python3.5 is the only dependency (brew install python3)
-cd gzint
-python3.5 gzint/tests.py                            # optional, check that tests are passing
-```
 
 ```python
 >>>from gzint import HugeInt
@@ -99,7 +92,17 @@ Right now, only `__eq__` (`==`) and `__hash__` (`in`) are optimized to work dire
 other operations will fall back to decompressing back to an `int` and using the slower `int` math methods,
 then recompressing the returned value.
 
-## TODOs:
+## Development:
+
+```bash
+git clone https://github.com/pirate/gzint.git       # python3.5 is the only dependency (brew install python3)
+cd gzint
+python3.5 setup.py test                             # optional, check that tests are passing
+python3.5 setup.py install
+# all code is inside gzint/main.py
+```
+
+**TODOs:**
 
  1. Override all math operators to operate directly on compressed `HugeInt`s instead of `int`s whenever possible
  3. Implement more compression methods and automatically pick the best one
