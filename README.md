@@ -2,7 +2,7 @@
 
 This library helps store massive integers by keeping a gzipped-string representation in memory.
 It makes storing, and comparing huge integers fast and lightweight, while gracefully falling back to normal
-integer operations when math is needed.
+integer operations when math is needed.  It's lightweight, fast when used properly, and has no dependencies.
 
 ## Usage:
 
