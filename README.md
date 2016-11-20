@@ -39,7 +39,7 @@ True
 
 This library is not magic, I have not somehow figured out how to break the [pigeon-hole principle](https://en.wikipedia.org/wiki/Pigeonhole_principle).
 It simply exploits the fact that most large numbers we work with in real life are not 100% random, and
-either contain repeating patterns (like lots of 0's) or can be represented symbolically by using
+either contain repeating patterns (like lots of 0's) or can be represented compactly by using using notations like
 scientific notation, factorial notation, [knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation), etc..
 
 Do not bother trying to use this library if you're actually reading random data,
@@ -51,7 +51,7 @@ adding other compression schemes, and automatically picking the one with the mos
 require adding threading to compress the int in several different ways concurrently).
 
 Another possible option is to try and compress all the `int`s used across an entire program, by storing some state
-every time a HugeInt is created, and seeing if patters exist globally that can be compressed together.
+every time a HugeInt is created, and seeing if patterns exist globally that can be compressed together.
 
 ## Docs:
 
@@ -122,12 +122,13 @@ python3.5 setup.py install
 
 **TODOs:**
 
- 1. Override all math operators to operate directly on compressed `HugeInt`s instead of `int`s whenever possible
- 3. Implement more compression methods and automatically pick the best one
-    - gzipped hex, binary, octal, or etc. representations of the number
+ 1. Implement more compression methods and automatically pick the best one (using Threads to compress in parallel?)
+    - gzipped hex, binary, octal, or other base representations of the number
     - scientific notation
+    - knuth's up-arrow notation
     - factorial notation
     - prime factor notation
     - other polynomial representations
- 4. Speed up compression & decompression
- 5. Use cached_property to prevent recreating the same `int`'s during `int` operations (prevents GC though...?)
+ 2. Speed up the compression & decompression
+ 3. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first
+ 4. Use a cached_property to prevent decompressing the same HugeInt repeatedly during `int` operations (allow expiry eventually with timeout to get GC benefits...?)
