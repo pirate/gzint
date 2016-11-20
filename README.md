@@ -14,15 +14,15 @@ pip3 install gzint
 ```python
 >>>from gzint import HugeInt
 
->>>normal_int = 10**1000000
+>>>normal_int = 10**1000000        # huge, but compressable (lots of 0's)
 >>>huge_int = HugeInt(normal_int)
 
 # HugeInts are useful when needing to store lots of large numbers without running out of memory
 # Notice how the memory footprint of a normal int is much larger than the equivalent HugeInt
 >>>normal_int.__sizeof__()
 442948                      # half a megabyte!!
->>>huge_int.__sizeof__()
-32                          # only 32 bytes
+>>>huge_int._value.__sizeof__()
+1025                        # only 1kb
 
 # HugeInts and normal ints are interchageably comparable, and have the same hashes
 >>>HugeInt(5) == 5
@@ -35,9 +35,27 @@ True
 True
 ```
 
+## Theory:
+
+This library is not magic, I have not somehow figured out how to break the [pigeon-hole principle](https://en.wikipedia.org/wiki/Pigeonhole_principle).
+It simply exploits the fact that most large numbers we work with in real life are not 100% random, and
+either contain repeating patterns (like lots of 0's) or can be represented symbolically by using
+scientific notation, factorial notation, [knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation), etc..
+
+Do not bother trying to use this library if you're actually reading random data,
+it will only make your `int`s bigger.
+
+The alpha implementation works by compressing repeating patterns in the base-10 representation of `int`s,
+which works very well for large numbers with lots of 0's, or any of the same digit repeated.  I'm working on
+adding other compression schemes, and automatically picking the one with the most memory savings (which may
+require adding threading to compress the int in several different ways concurrently).
+
+Another possible option is to try and compress all the `int`s used across an entire program, by storing some state
+every time a HugeInt is created, and seeing if patters exist globally that can be compressed together.
+
 ## Docs:
 
-`HugeInt` is a type which aids in storing very large, but compressable numbers in memory in python >= 3.5.
+`HugeInt` is a type which aids in storing very large, but **compressable numbers** in memory in python >= 3.5.
 It sacrifices CPU time during intialization and math operations, for fast comparisons and at-rest memory efficiency.
 
 `HugeInt` implements the `int` interface, you can almost always treat it like a normal python `int`.
