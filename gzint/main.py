@@ -7,7 +7,7 @@ import zlib
 assert sys.version_info >= (3, 5), 'Must be used on python >= 3.5.0'  # don't want to deal with longs, byte-strings, etc.
 
 
-HUGE_NUM_THRESHOLD = 442948  # memory footprint in bytes before an nubmer is compressed
+HUGE_NUM_THRESHOLD = 442948  # memory footprint in bytes before an number is compressed
 HUGE_STR_THRESHOLD = 1000    # memroy footprint in bytes before a stringified number is considered huge
 
 def is_huge(value):
