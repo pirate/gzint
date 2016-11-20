@@ -37,7 +37,7 @@ True
 
 ## Docs:
 
-`HugeInt` is a type which aids in storing very large, but compressable nubmers in memory in python >= 3.5.
+`HugeInt` is a type which aids in storing very large, but compressable numbers in memory in python >= 3.5.
 It sacrifices CPU time during intialization and math operations, for fast comparisons and at-rest memory efficiency.
 
 `HugeInt` implements the `int` interface, you can almost always treat it like a normal python `int`.
