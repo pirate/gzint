@@ -129,6 +129,7 @@ python3.5 setup.py install
     - factorial notation
     - prime factor notation
     - other polynomial representations
- 2. Speed up the compression & decompression
- 3. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first
- 4. Use a cached_property to prevent decompressing the same HugeInt repeatedly during `int` operations (allow expiry eventually with timeout to get GC benefits...?)
+ 2. Fall back to storing the int uncompressed if compression ends up making it bigger
+ 3. Speed up the compression & decompression
+ 4. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first
+ 5. Use a cached_property to prevent decompressing the same HugeInt repeatedly during `int` operations (allow expiry eventually with timeout to get GC benefits...?)
