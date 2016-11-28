@@ -101,7 +101,7 @@ if HugeInt(10**1000000) in numbers_seen:
 
 **Why `HugeInt` is slow to init:**
 
-You man notice that initializing big `HugeInt`s takes some time.  This is because `HugeInt` uses
+You may notice that initializing big `HugeInt`s takes some time.  This is because `HugeInt` uses
 the gzip "deflate" algorithm, and must perform an O(n) pass over the number, where n is the number of digits in base-10.
 Due to this initial cost, it's recommended to avoid using `HugeInt`s for applications where you will need to re-initialize
 many `HugeInt`s, or perform many math operations on `HugeInt`s in memory.
