@@ -34,7 +34,7 @@ True
 >>>5 in {HugeInt(5), 6, 7}   # uses python's hashes of the original int for identity
 True
 
-# Of course, this is all silly if you're know beforehand that you're only storing 10*100000, you can just store the string '10**6' (54 bytes), and compute it later.
+# Of course, this is all silly if you're know beforehand that you're only storing 10**100000, you can just store the string '10**10^6' (57 bytes), and compute it later.
 # This applies to almost all compressible data, if you know beforehand what you're storing, picking the perfect compression method is easy.
 # The tricky part is applying general encryption methods, because compression is expensive and it's not worth the CPU cost of trying methods sequentially until you find the right one.
 # gzip is a fairly simple compression algorithm for catching repeating data, I'm also planning on testing JPEG-style fft compression.
@@ -64,8 +64,9 @@ every time a HugeInt is created, and seeing if patterns exist globally that can 
 It sacrifices CPU time during intialization and math operations, for fast comparisons and at-rest memory efficiency.
 
 `HugeInt` implements the `int` interface, you can almost always treat it like a normal python `int`.
+It will fall back to creating the full `int` in memory if an operation is not supported on the compressed form (e.g. multiplication).
 
-`HugeInt` provides the following methods that differ from `int`:
+`HugeInt` provides these methods on top of `int`:
 
 ```python
  - HugeInt.__init__:   Initialize a HugeInt from an `int` or str representation
@@ -84,7 +85,7 @@ equivalent method, and then the result is re-compressed and returned as a `HugeI
 
 **Example Use Case:**
 
-Read a file full of huge numbers, and check to see which ones occur more than once (in O(n) time).
+Read a file full of huge numbers, and check to see which ones occur more than once (in O(n * /) time).
 
 ```python
 numbers_seen = set()
@@ -127,14 +128,15 @@ python3.5 setup.py install
 
 **TODOs:**
 
- 1. Implement more compression methods and automatically pick the best one (using Threads to compress in parallel?)
+ 1. Implement more compression methods and allow users to manually chose which one, with a way to find the optimal one for a given number:
     - gzipped hex, binary, octal, or other base representations of the number
+    - base + exponents
     - scientific notation
     - knuth's up-arrow notation
     - factorial notation
     - prime factor notation
     - other polynomial representations
  2. Fall back to storing the int uncompressed if compression ends up making it bigger
- 3. Speed up the compression & decompression
- 4. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first
+ 3. Speed up/parallelize the compression & decompression
+ 4. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first, depending on compression method
  5. Use a cached_property to prevent decompressing the same HugeInt repeatedly during `int` operations (allow expiry eventually with timeout to get GC benefits...?)
