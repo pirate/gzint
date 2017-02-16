@@ -31,8 +31,13 @@ True
 10
 >>>HugeInt(5) + HugeInt(5)
 10
->>>5 in {HugeInt(5), 6, 7}
+>>>5 in {HugeInt(5), 6, 7}   # uses python's hashes of the original int for identity
 True
+
+# Of course, this is all silly if you're know beforehand that you're only storing 10*100000, you can just store the string '10**6' (54 bytes), and compute it later.
+# This applies to almost all compressible data, if you know beforehand what you're storing, picking the perfect compression method is easy.
+# The tricky part is applying general encryption methods, because compression is expensive and it's not worth the CPU cost of trying methods sequentially until you find the right one.
+# gzip is a fairly simple compression algorithm for catching repeating data, I'm also planning on testing JPEG-style fft compression.
 ```
 
 ## Theory:
@@ -46,7 +51,7 @@ Do not bother trying to use this library if you're actually reading random data,
 it will only make your `int`s bigger.
 
 The alpha implementation works by compressing repeating patterns in the base-10 representation of `int`s,
-which works very well for large numbers with lots of 0's, or any of the same digit repeated.  I'm working on
+which works very well for large numbers with lots of repeating digits (in base-10).  I'm working on
 adding other compression schemes, and automatically picking the one with the most memory savings (which may
 require adding threading to compress the int in several different ways concurrently).
 
