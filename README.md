@@ -1,4 +1,4 @@
-# gzint: A library for storing huge integeters efficiently
+# gzint: A library for storing huge integers efficiently
 
 
 This python library helps store massive integers by using a gzipped-string representation in memory.
