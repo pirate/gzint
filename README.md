@@ -1,4 +1,4 @@
-# gzint: A library for storing huge integers efficiently
+# gzint: A library for storing huge integers efficiently [![PyPI](https://img.shields.io/pypi/v/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![PyPI](https://img.shields.io/pypi/pyversions/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/thesquashSH)
 
 
 This python library helps store massive integers by using a gzipped-string representation in memory.
