@@ -1,4 +1,4 @@
-# gzint: A library for storing huge integeters efficiently [![PyPI](https://img.shields.io/pypi/v/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![PyPI](https://img.shields.io/pypi/pyversions/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/thesquashSH)
+# gzint: A library for storing huge integers efficiently [![PyPI](https://img.shields.io/pypi/v/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![PyPI](https://img.shields.io/pypi/pyversions/gzint.svg?style=flat-square)](https://pypi.python.org/pypi/gzint/) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/thesquashSH)
 
 
 This python library helps store massive integers by using a gzipped-string representation in memory.
@@ -136,6 +136,7 @@ python3.5 setup.py install
     - factorial notation
     - prime factor notation
     - other polynomial representations
+    - python [rational number support](https://docs.python.org/3.6/library/numbers.html#numbers.Rational)
  2. Fall back to storing the int uncompressed if compression ends up making it bigger
  3. Speed up/parallelize the compression & decompression
  4. See if more math operations can be performed directly on compressed `HugeInt`s without uncompressing first, depending on compression method
