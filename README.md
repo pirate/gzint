@@ -85,7 +85,7 @@ equivalent method, and then the result is re-compressed and returned as a `HugeI
 
 **Example Use Case:**
 
-Read a file full of huge numbers, and check to see which ones occur more than once (in O(n * /) time).
+Read a file full of huge numbers, and check to see which ones occur more than once (in `O(n)` time).
 
 ```python
 numbers_seen = set()
