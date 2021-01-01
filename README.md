@@ -12,26 +12,26 @@ pip3 install gzint
 ```
 
 ```python
->>>from gzint import HugeInt
+>>> from gzint import HugeInt
 
->>>normal_int = 10**1000000        # huge, but compressable (lots of 0's)
->>>huge_int = HugeInt(normal_int)
+>>> normal_int = 10**1000000        # huge, but compressable (lots of 0's)
+>>> huge_int = HugeInt(normal_int)
 
 # HugeInts are useful when needing to store lots of large numbers without running out of memory
 # Notice how the memory footprint of a normal int is much larger than the equivalent HugeInt
->>>normal_int.__sizeof__()
-442948                      # half a megabyte!!
->>>huge_int._value.__sizeof__()
+>>> normal_int.__sizeof__()
+442948                      # almost 0.5mb!!
+>>> huge_int._value.__sizeof__()
 1025                        # only 1kb
 
 # HugeInts and normal ints are interchageably comparable, and have the same hashes
->>>HugeInt(5) == 5
+>>> HugeInt(5) == 5
 True
->>>HugeInt(5) + 5
+>>> HugeInt(5) + 5
 10
->>>HugeInt(5) + HugeInt(5)
+>>> HugeInt(5) + HugeInt(5)
 10
->>>5 in {HugeInt(5), 6, 7}   # uses python's hashes of the original int for identity
+>>> 5 in {HugeInt(5), 6, 7}   # uses python's hashes of the original int for identity
 True
 
 # Of course, this is all silly if you're know beforehand that you're only storing 10**100000, you can just store the string '10**10^6' (57 bytes), and compute it later.
